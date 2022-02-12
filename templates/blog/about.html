@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block head %}
+   <title>about me</title>
+   <meta name="description" content="To know more about me">
+
+   <meta charset="UTF-8">
+  {% endblock %}
+</head>
+<body>
+  {% block body %}
+  <section>
+    <div class="row">
+        <div class="col-md-12">
+            <article class="blog-post">
+                <div class="blog-post-body">
+                    <h2><a href="{% url 'blog:aboutme' %}">About Me</a></h2>
+                    <div class="blog-post-text">
+                           <p> 
+                            {% for manger in about_me %}
+                              {{ manger.message }}
+                              
+                             {% endfor %}
+                           </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
+  
+</body>
+</html>
+
+
+
+
+
+

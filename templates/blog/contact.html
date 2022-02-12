@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load crispy_forms_tags %}
+
+    {% block head %}
+
+    <title>Contact page</title>
+    <meta name="description" content="Contact me here">
+
+
+    {% endblock %}
+
+</head>
+<body>
+
+    {% block body %}
+
+    <div class=" form-group col-md-4 col-md-offset-4">
+      <div class = "form-group row justify-content-center">
+          <div class="card">
+      <div class="card-body">
+        <h1>Contact</h1>
+		<h4>Contact me directly if you have any questions </h4>
+		<p>
+			Please write your name, phone number, email address and a message below.
+		</p>
+      <form method = "POST" id='form'>
+          {% csrf_token %}
+          {{ form|crispy}}
+          <button type = "submit" class = " btn btn-primary ">Send</button>
+          </form>
+      </div>
+      </div>
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+<script>
+        const form = document.getElementById('form');
+        form.addEventListener('submit', submitHandler);
+
+        function submitHandler(e){
+            e.preventDefault()
+
+            $.ajax({
+                type:'POST',
+                url: '{% url "blog:contact" %}',
+                data: $("#form").serialize(),
+                dataType: 'json',
+
+                success: function(data){
+                    if (data.msg ==='success'){
+                        alert('Form is Submitted');
+                    }
+
+                }
+
+
+            })
+
+        }
+   
+   
+        
+    </script>
+
+     
+    {% endblock %}
+    
+    
+</body>
+</html>
